@@ -1,16 +1,16 @@
-package net.kasumadps.spawntp;
+package spawnog;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import net.kasumadps.spawntp.commands.SetSpawnCommand;
-import net.kasumadps.spawntp.commands.SpawnCommand;
-import net.kasumadps.spawntp.listener.SpawnListener;
 import org.bukkit.plugin.java.JavaPlugin;
+import spawnog.commands.SetSpawnCommand;
+import spawnog.commands.SpawnCommand;
+import spawnog.listener.SpawnListener;
 
 @Slf4j
-public final class SpawnTP extends JavaPlugin {
+public final class SpawnOG extends JavaPlugin {
     @Getter
-    private static SpawnTP instance;
+    private static SpawnOG instance;
 
     @Override
     public void onEnable() {

@@ -1,9 +1,8 @@
-package net.kasumadps.spawntp.commands;
+package spawnog.commands;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import net.kasumadps.spawntp.SpawnTP;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -14,9 +13,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import spawnog.SpawnOG;
 
 public class SpawnCommand implements CommandExecutor, TabCompleter {
-    private final FileConfiguration config = SpawnTP.getInstance().getConfig();
+    private final FileConfiguration config = SpawnOG.getInstance().getConfig();
     private static final String LOCATION_PATH = "general.location";
 
     @Override

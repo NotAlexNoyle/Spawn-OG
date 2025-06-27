@@ -1,11 +1,10 @@
-package net.kasumadps.spawntp.commands;
+package spawnog.commands;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import javax.management.openmbean.InvalidOpenTypeException;
-import net.kasumadps.spawntp.SpawnTP;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,9 +15,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import spawnog.SpawnOG;
 
 public class SetSpawnCommand implements CommandExecutor, TabCompleter {
-    private final JavaPlugin plugin = SpawnTP.getInstance();
+    private final JavaPlugin plugin = SpawnOG.getInstance();
     private final FileConfiguration config = this.plugin.getConfig();
 
     private static String locationPath = "general.location";
@@ -42,7 +42,7 @@ public class SetSpawnCommand implements CommandExecutor, TabCompleter {
         }
 
         // if unset
-        if (argsList.contains("unset")) { // NOSONAR - intended
+        if (argsList.contains("unset")) {
             this.config.set(locationPath, null);
             this.plugin.saveConfig();
             player.sendMessage(this.config.getString("locale.spawnSet", "Spawn location updated."));

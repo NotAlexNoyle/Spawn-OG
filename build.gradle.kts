@@ -8,7 +8,7 @@ plugins {
 
 java { sourceCompatibility = JavaVersion.VERSION_17 }
 
-group = "net.kasumadps.spawntp"
+group = "net.trueog.spawntp"
 
 version = "1.0"
 

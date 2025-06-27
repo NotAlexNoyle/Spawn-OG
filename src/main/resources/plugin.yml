@@ -5,7 +5,7 @@ version: '${version}'
 api-version: '${apiVersion}'
 authors: [ kasumabalidps, NotAlexNoyle ]
 website: https://github.com/true-og/Spawn-OG
-main: plugin.SpawnTP
+main: spawnog.SpawnOG
 api-version: 1.19
 
 commands:

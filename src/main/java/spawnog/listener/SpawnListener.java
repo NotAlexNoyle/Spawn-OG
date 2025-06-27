@@ -1,41 +1,41 @@
-package net.kasumadps.spawntp.listener;
+package spawnog.listener;
 
-import net.kasumadps.spawntp.SpawnTP;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import spawnog.SpawnOG;
 
 public class SpawnListener implements Listener {
     private Location spawn() {
-        return SpawnTP.getInstance().getConfig().getLocation("general.location");
+        return SpawnOG.getInstance().getConfig().getLocation("general.location");
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
-        if (!e.getPlayer().hasPlayedBefore()) {
+    public void onJoin(PlayerJoinEvent event) {
+        if (!event.getPlayer().hasPlayedBefore()) {
             Location s = spawn();
             if (s != null) {
                 Location loc = s.clone();
                 loc.setYaw(0f);
                 loc.setPitch(0f);
-                e.getPlayer().teleportAsync(loc);
+                event.getPlayer().teleportAsync(loc);
             }
         }
     }
 
     @EventHandler
-    public void onRespawn(PlayerRespawnEvent e) {
-        Player p = e.getPlayer();
+    public void onRespawn(PlayerRespawnEvent event) {
+        Player p = event.getPlayer();
         if (p.getBedSpawnLocation() != null) return;
         Location s = spawn();
         if (s != null) {
             Location loc = s.clone();
             loc.setYaw(0f);
             loc.setPitch(0f);
-            e.setRespawnLocation(loc);
+            event.setRespawnLocation(loc);
         }
     }
 }
