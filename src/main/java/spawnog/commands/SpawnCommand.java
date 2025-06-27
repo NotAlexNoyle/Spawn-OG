@@ -2,6 +2,8 @@ package spawnog.commands;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.user.User;
 import org.bukkit.Bukkit;
@@ -17,6 +19,7 @@ public class SpawnCommand implements CommandExecutor, TabCompleter {
 
     private final SpawnOG plugin = SpawnOG.getInstance();
     private final FileConfiguration cfg = plugin.getConfig();
+    private final MiniMessage mm = MiniMessage.miniMessage();
 
     @Override
     public boolean onCommand(
@@ -25,7 +28,8 @@ public class SpawnCommand implements CommandExecutor, TabCompleter {
         if (args.length == 0) {
             if (!(sender instanceof Player p)) return false;
             if (!p.hasPermission(cmd.getPermission())) {
-                p.sendMessage(cfg.getString("locale.missingPermission", "You are lacking the required permissions."));
+                sender.sendMessage(
+                        cfg.getString("locale.missingPermission", "You are lacking the required permissions."));
                 return true;
             }
             Location dest = resolve(p);
@@ -33,7 +37,7 @@ public class SpawnCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(cfg.getString("locale.spawnNotSet", "Server spawn not set."));
                 return true;
             }
-            p.teleportAsync(dest);
+            scheduleTeleport(p, dest);
             return true;
         }
 
@@ -52,7 +56,7 @@ public class SpawnCommand implements CommandExecutor, TabCompleter {
             sender.sendMessage(cfg.getString("locale.spawnNotSet", "Server spawn not set."));
             return true;
         }
-        target.teleportAsync(dest);
+        scheduleTeleport(target, dest);
         return true;
     }
 
@@ -67,6 +71,20 @@ public class SpawnCommand implements CommandExecutor, TabCompleter {
                     .collect(Collectors.toList());
         }
         return List.of();
+    }
+
+    private void scheduleTeleport(Player player, Location dest) {
+        String raw =
+                cfg.getString("locale.spawnWarmup", "<gold>Teleporting to spawn in <red>5 seconds...</red></gold>");
+        Component msg = mm.deserialize(raw);
+        player.sendMessage(msg);
+        Bukkit.getScheduler()
+                .runTaskLater(
+                        plugin,
+                        () -> {
+                            if (player.isOnline()) player.teleportAsync(dest);
+                        },
+                        20L * 5);
     }
 
     private Location resolve(Player p) {

@@ -10,6 +10,10 @@
 ```/spawn```
 - **Teleport Others to Spawn:**
 ```/spawn <player```
+- **Async teleportation:**
+Minimal impact on server performance
+- **Teleport delay:**
+5 seconds
 - **First Join Spawn (Newbie Spawn):**
 - **Respawn Handling:**
 By default, if `respawn-at-home` is set to false, players will respawn at the spawn point. If `respawn-at-home` is true, players will respawn at their bed or home location (if defined) instead of spawn. The plugin respects beds and Essentials homes according to this setting.
@@ -42,6 +46,12 @@ Set a spawn point for a specific group name. For example, `/setspawn newbie` wil
 Use the TrueOG Bootstrap to build automatically, or run:
 
 ```./gradlew clean build eclipse```
+
+## TODO:
+
+- Cancel teleport if a player is in combat
+
+- Cancel teleport if a player moves
 
 ## Licese
 
