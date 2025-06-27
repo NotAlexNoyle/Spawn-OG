@@ -1,9 +1,10 @@
 plugins {
-    id("java")
-    id("java-library")
-    id("com.diffplug.spotless") version "7.0.4"
-    id("com.gradleup.shadow") version "8.3.6"
-    eclipse
+    id("java") // Tell gradle this is a java project.
+    id("java-library") // Import helper for source-based libraries.
+    id("com.diffplug.spotless") version "7.0.4" // Import auto-formatter.
+    id("com.gradleup.shadow") version "8.3.6" // Import shadow API.
+    eclipse // Import eclipse plugin for IDE integration.
+    id("io.freefair.lombok") version "8.13.1" // Automatic lombok support.
 }
 
 java { sourceCompatibility = JavaVersion.VERSION_17 }
@@ -25,22 +26,24 @@ repositories {
     mavenCentral()
     gradlePluginPortal()
     maven { url = uri("https://repo.purpurmc.org/snapshots") }
+    maven {
+        url = uri("https://repo.codemc.io/repository/maven-public/") // Import the CodeMC Maven Repository.
+    }
 }
 
 dependencies {
     compileOnly("org.purpurmc.purpur:purpur-api:1.19.4-R0.1-SNAPSHOT")
-    compileOnly("org.projectlombok:lombok:1.18.26")
-    annotationProcessor("org.projectlombok:lombok:1.18.26")
+    compileOnly("net.luckperms:api:5.4") // Import LuckPerms API.
 }
 
-tasks.withType<AbstractArchiveTask>().configureEach {
+tasks.withType<AbstractArchiveTask>().configureEach { // Ensure reproducible .jars
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 }
 
 tasks.shadowJar {
-    exclude("io.github.miniplaceholders.*")
-    archiveClassifier.set("")
+    exclude("io.github.miniplaceholders.*") // Exclude the MiniPlaceholders package from being shadowed.
+    archiveClassifier.set("") // Use empty string instead of null.
     minimize()
 }
 
@@ -53,7 +56,7 @@ tasks.jar { archiveClassifier.set("part") }
 
 tasks.withType<JavaCompile>().configureEach {
     options.compilerArgs.add("-parameters")
-    options.compilerArgs.add("-Xlint:deprecation")
+    options.compilerArgs.add("-Xlint:deprecation") // Triggers deprecation warning messages.
     options.encoding = "UTF-8"
     options.isFork = true
 }
