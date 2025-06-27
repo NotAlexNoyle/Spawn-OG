@@ -1,4 +1,4 @@
-name: SpawnTP
+name: Spawn-OG
 description: A Minecraft Plugin simplifies teleporting to the spawn location.
 description: A drop-in replacement for EssentialsSpawn
 version: '${version}'
@@ -7,26 +7,22 @@ authors: [ kasumabalidps, NotAlexNoyle ]
 website: https://github.com/true-og/Spawn-OG
 main: spawnog.SpawnOG
 api-version: 1.19
-
 commands:
   spawn:
-    description: Teleport to the Server spawn.
-    usage: /spawn
+    description: Teleport yourself (or another player) to the server spawn
+    usage: /spawn [player]
+    permission: spawnog.teleport
   setspawn:
-    description: Set/Unset the Server spawn.
-    usage: /setspawn [ unset, [ normalize-view, normalize-position ]]
-  
+    description: Set or clear the server spawn point
+    usage: /setspawn [normalize-view] [normalize-position] | /setspawn unset
+    permission: spawnog.admin
 permissions:
-  spawntp.*:
-    description: Gives full access to the plugin.
-    default: op;
-    children:
-      spawntp.teleport: true
-      spawntp.admin: true
-  spawntp.teleport:
-    description: Teleport to the Server spawn.
+  spawnog.teleport:
+    description: Use /spawn on yourself
     default: true
-  spawntp.admin:
-    description: Set the Server spawn.
+  spawn.others:
+    description: Use /spawn <player>
     default: op
-
+  spawnog.admin:
+    description: Use /setspawn
+    default: op

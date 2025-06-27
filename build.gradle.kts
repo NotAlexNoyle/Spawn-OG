@@ -8,7 +8,7 @@ plugins {
 
 java { sourceCompatibility = JavaVersion.VERSION_17 }
 
-group = "net.trueog.spawntp"
+group = "net.trueog.spawnog"
 
 version = "1.0"
 
