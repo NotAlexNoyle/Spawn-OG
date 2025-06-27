@@ -1,11 +1,11 @@
 name: SpawnTP
 description: A Minecraft Plugin simplifies teleporting to the spawn location.
-version: '${project.version}'
-
-author: kasumabalidps
-website: https://github.com/kasumabalidps
-
-main: net.kasumadps.spawntp.SpawnTP
+description: A drop-in replacement for EssentialsSpawn
+version: '${version}'
+api-version: '${apiVersion}'
+authors: [ kasumabalidps, NotAlexNoyle ]
+website: https://github.com/true-og/Spawn-OG
+main: plugin.SpawnTP
 api-version: 1.19
 
 commands:
@@ -29,3 +29,4 @@ permissions:
   spawntp.admin:
     description: Set the Server spawn.
     default: op
+

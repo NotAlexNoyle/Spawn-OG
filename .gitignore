@@ -23,7 +23,18 @@
 hs_err_pid*
 replay_pid*
 
-# other
-target/
-*.iml
+# macOS system files
+.DS_Store
+
+# gradle build output files
+build/
+.gradle/
+
+# eclipse project files
+.settings/
+.project
+.classpath
+bin/
+
+# IntelliJ files
 .idea/
